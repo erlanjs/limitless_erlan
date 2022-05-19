@@ -10,6 +10,7 @@ import {selectAuth} from "../../../store/selector/auth";
 import {fonts} from "../../../constants/fonts";
 import BaseInput from "../../Form/BaseInput";
 import BaseButton from "../../Form/BaseButton";
+import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import { SpinnerCircular } from 'spinners-react';
 
@@ -78,6 +79,7 @@ export const ContactsInfo: FC = () => {
     const profileActions = useProfileInfoActions();
     const authState = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
+    const router = useRouter()
 
 
     const initialValues1 = {
@@ -86,6 +88,8 @@ export const ContactsInfo: FC = () => {
         email: !!authState.profile.email ? authState.profile.email : "",
         workWebsite: !!authState.profile.workWebsite ? authState.profile.workWebsite : "",
     }
+
+    const [exit, setExit] = useState(false)
 
     return (
         <>
@@ -107,6 +111,7 @@ export const ContactsInfo: FC = () => {
                     if (!result.success) {
                         actions.setStatus(result.message);
                     }
+                    setExit(true)
                     actions.setSubmitting(false);
 
                 }}
@@ -153,18 +158,16 @@ export const ContactsInfo: FC = () => {
                         <Box style={{textAlign: "center"}}>
                             <BaseButton classes={styles.button1} type="submit">Save</BaseButton>
                         </Box>
-                        {!!formik.status && (
-                            <Typography fontSize={media(14, 16)} fontWeight="500" color="secondary">
-                                {formik.status}
-                            </Typography>
-                        )}
-
-
-
-
-
-
-
+                        <Box style={{textAlign: "center"}}>
+                            {exit && <BaseButton classes={styles.button1} onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>Exit</BaseButton>}
+                        </Box>
+                        <Box style={{textAlign: "center"}}>
+                            {!!formik.status && (
+                                <Typography fontSize={media(14, 16)} fontWeight="500" color="secondary">
+                                    {formik.status}
+                                </Typography>
+                            )}
+                        </Box>
 
 
                     </form>
@@ -316,6 +319,7 @@ export const WorkInfo: FC = () => {
     const [userImages, setUserImages]: any = useState([])
     const [userVideos, setUserVideos]: any = useState([])
     const [userImagesData, setUserImagesData]: any = useState()
+    const router = useRouter()
 
     const [accses, setAccses]: any = useState('')
     useEffect(() => {
@@ -351,6 +355,7 @@ const getCards = () => {
 
 
 const [loadingCard, setLoadingCrad] = useState(false)
+    const [exit, setExit] = useState(false)
 
 
 
@@ -442,6 +447,7 @@ const [loadingCard, setLoadingCrad] = useState(false)
                     if (!result.success) {
                         actions.setStatus(result.message);
                     }
+                    setExit(true)
                     actions.setSubmitting(false);
 
                 }}
@@ -491,6 +497,7 @@ const [loadingCard, setLoadingCrad] = useState(false)
                         <BaseInput style={{textAlign: 'center'}} placeholder="Address" name="address" id="address"
                                    type="text"/>
                         <BaseButton classes={styles.button} type="submit">Save</BaseButton>
+                        {exit && <BaseButton classes={styles.button} onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>exit</BaseButton>}
                         {!!formik.status && (
                             <Typography fontSize={media(14, 16)} fontWeight="500" color="secondary">
                                 {formik.status}
@@ -617,6 +624,8 @@ export const Socials: FC = () => {
     const dispatch = useAppDispatch();
     const authState = useAppSelector(selectAuth);
     const theme: Theme = useTheme();
+    const router = useRouter()
+    const [exit, setExit] = useState(false)
 
     const outInitialValues = () => {
         const pickFields = ({
@@ -663,6 +672,8 @@ export const Socials: FC = () => {
                     if (!result.success) {
                         actions.setStatus(result.message);
                     }
+                    setExit(true)
+
                 }
                 actions.setSubmitting(true);
             }}
@@ -681,7 +692,13 @@ export const Socials: FC = () => {
                             )
                         }
                     )}
-                    <BaseButton type="submit">Save</BaseButton>
+
+                    <Box style={{textAlign: 'center'}}>
+                        <BaseButton style={{width: "20%"}} type="submit">Save</BaseButton>
+                    </Box>
+                    <Box style={{textAlign: 'center'}}>
+                        {exit && <BaseButton style={{width: "20%"}} onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>Exit</BaseButton>}
+                    </Box>
                     {!!formik.status && (
                         <Typography textAlign="center" fontSize={media(16, 18)} fontWeight="500" color="secondary">
                             {formik.status}
