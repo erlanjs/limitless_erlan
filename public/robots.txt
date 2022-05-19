@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /profile
+Sitemap: https://limitless-connection.com/sitemap.xml

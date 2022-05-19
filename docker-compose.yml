@@ -1,0 +1,34 @@
+
+version: "3.8"
+
+services:
+
+  web:
+    build: .
+    container_name: front
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: linuxserver/swag
+    restart: always
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Dubai
+      - URL=limitless-connection.com
+      - VALIDATION=http
+      - ONLY_SUBDOMAINS=false
+      - STAGING=false
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/config/nginx/site-confs/default
+      - lets:/config/keys
+
+
+volumes:
+  lets:
