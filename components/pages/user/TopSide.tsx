@@ -4,7 +4,7 @@ import {Box, Switch, Theme, Typography} from "@mui/material";
 import {makeStyles} from "@mui/styles";
 import {media} from "../../../utility/media";
 import Avatar from "../../User/Avatar";
-import {defaultAvatar, defaultBgImage} from "../../../constants/main";
+import {defaultAvatar, defaultBgImage, defaultAvatar2} from "../../../constants/main";
 import UserTitles from "./UserTitles";
 import {styled} from "@mui/material/styles";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
@@ -106,7 +106,7 @@ const TopSide:FC = () => {
 
     const outAvatar = () => {
 
-        return user.data.avatar ? user.data.avatar : null;
+        return user.data.avatar ? user.data.avatar : defaultAvatar2;
     }
 
     const handleModeChange = () => {
