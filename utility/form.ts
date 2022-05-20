@@ -50,19 +50,19 @@ type socialsKeyType = {
 export const socials: socialsKeyType = {
     whatsapp: {
         icon: WhatsAppIcon,
-        placeholder: "Enter your phone",
+        placeholder: "971",
         save: (value) => value ? `https://wa.me/${value}` : null,
         out: (value) => value ? value.replace('https://wa.me/', "") : ""
     },
     instagram: {
         icon: InstagramIcon,
-        placeholder: "Enter your username",
+        placeholder: "Nickname",
         save: (value) => value ? `https://www.instagram.com/${value}` : null,
         out: (value) => value ? value.replace('https://www.instagram.com/', "") : ""
     },
     facebook: {
         icon: FacebookIcon,
-        placeholder: "Paste link to your account",
+        placeholder: "Paste link",
         save: (value) => value ? value : null,
         out: (value) => value ? value : "",
     },
@@ -80,31 +80,31 @@ export const socials: socialsKeyType = {
     },
     telegram: {
         icon: TelegramIcon,
-        placeholder: "Enter your nickname",
+        placeholder: "Nickname",
         save: (value) => value ? `https://t.me/${value}` : null,
         out: (value) => value ? value.replace('https://t.me/', "") : ""
     },
     wechat: {
         icon: WechatIcon,
-        placeholder: "Enter your nickname",
+        placeholder: "Nickname",
         save: (value) => value ? `https://wechat.com/${value}` : null,
         out: (value) => value ? value.replace('https://wechat.com/', "") : ""
     },
     snapchat: {
         icon: SnapchatIcon,
-        placeholder: "Enter your nickname",
+        placeholder: "Nickname",
         save: (value) => value ? `https://snapchat.com/${value}` : null,
         out: (value) => value ? value.replace('https://snapchat.com/', "") : ""
     },
     tiktok: {
         icon: TikTokIcon,
-        placeholder: "Enter your nickname",
+        placeholder: "Nickname",
         save: (value) => value ? `https://tiktok.com/${value}` : null,
         out: (value) => value ? value.replace('https://tiktok.com/', "") : ""
     },
     twitter: {
         icon: TwitterIcon,
-        placeholder: "Enter your nickname",
+        placeholder: "Nickname",
         save: (value) => `https://twitter.com/${value}`,
         out: (value) => value ? value.replace('https://twitter.com/', "") : ""
     }
