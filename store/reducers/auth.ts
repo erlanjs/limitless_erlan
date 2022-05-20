@@ -91,7 +91,7 @@ const auth = createSlice({
             state.imageResizeModalData = action.payload;
         },
         setImageHiden(state, action: PayloadAction<boolean>){
-                state.profile.avatarHidden =  action.payload;
+            state.profile.avatarHidden =  action.payload;
         },
         setUsersImageModal(state, action: PayloadAction<boolean>){
             state.usersImageModal =  action.payload;
