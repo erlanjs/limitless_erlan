@@ -7,6 +7,7 @@ import TikTok from "../components/Icons/TikTok";
 import {Instagram, FacebookOutlined, WhatsappRounded, LinkedIn, Telegram, Twitter, YouTube} from "@mui/icons-material";
 import Snapchat from "../components/Icons/Snapchat";
 import Email from "../components/Icons/Email";
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import {
     WhatsappShareButton,
     FacebookShareButton,

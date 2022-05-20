@@ -369,8 +369,8 @@ const InfoPortfolioModal: FC = () => {
                     {/*<ModeSwitch onChange={btnStart} checked={bool}/>*/}
                 </Paper>
                 <Box style={{display: "flex", justifyContent: "space-between"}}>
-                    <Button className={styles.editButton} onClick={handleOpenBgUploadModal}>Background</Button>
-                    <Button className={styles.editButton} onClick={handleOpenAvatarUploadModal}>Avatar</Button>
+                    <Button className={styles.editButton} onClick={handleOpenBgUploadModal}>Edit background</Button>
+                    <Button className={styles.editButton} onClick={handleOpenAvatarUploadModal}>Edit display</Button>
                 </Box>
                 <Formik
                     enableReinitialize
@@ -396,7 +396,7 @@ const InfoPortfolioModal: FC = () => {
                         <form onSubmit={formik.handleSubmit} className={styles.form}>
                             <Loading fontSize={media(16, 18)} bg={hex2rgba("#000000", 0.7)}
                                      active={formik.isSubmitting}/>
-                            {edit ? null : <DarkButton style={{width: "100%", marginTop: "13px"}} onClick={() => setEdit(true)}>Edit Name</DarkButton>}
+                            {edit ? null : <DarkButton style={{width: "100%", marginTop: "13px"}} onClick={() => setEdit(true)}>Edit name</DarkButton>}
 
                             {edit &&
                                 <>
@@ -411,7 +411,7 @@ const InfoPortfolioModal: FC = () => {
 
 
                                     <Box style={{textAlign: "center"}}>
-                                        <BaseButton type="submit">Save</BaseButton>
+                                        <BaseButton type="submit">SAVE</BaseButton>
                                     </Box>
                                     {!!formik.status && (
                                         <Typography fontSize={media(14, 16)} fontWeight="500" color="secondary">

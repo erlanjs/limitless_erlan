@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 import * as yup from 'yup';
 import { SpinnerCircular } from 'spinners-react';
 import { useForm } from "react-hook-form";
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 
 
 import {User, UserModel} from "../../../models/user";
@@ -106,7 +107,7 @@ const useContactsStyles = makeStyles((theme: Theme) => ({
 
 export const ContactsInfo: FC = () => {
     const styles = useContactsStyles();
-    const profileActions = useProfileInfoActions();
+    const {PASSWORD} = useProfileInfoActions();
     const authState = useAppSelector(selectAuth);
     const dispatch = useAppDispatch();
     const router = useRouter()
@@ -228,16 +229,17 @@ export const ContactsInfo: FC = () => {
                             <Loading fontSize={media(16, 18)} bg={hex2rgba("#000000", 0.7)}
                                      active={loadings}/>
                 <Box style={{display: "flex", margin: "20px 0"}}>
+
                     <img src={require("../../../assets/images/MobilePhone.svg")} alt="" style={{marginRight :"20px"}}/>
-                    <input defaultValue={initialValues1.workPhone} placeholder="workPhone" className={styles.baseInput}  {...register("workPhone")} />
+                    <input defaultValue={initialValues1.workPhone} type={"text"}  placeholder="workPhone" className={styles.baseInput}  {...register("workPhone")} />
                 </Box>
                 <Box style={{display: "flex", margin: "20px 0"}}>
                     <img src={require("../../../assets/images/MobileTel.svg")} alt="" style={{marginRight :"20px"}}/>
-                    <input defaultValue={initialValues1.personalPhone} placeholder="personalPhone" className={styles.baseInput}  {...register("personalPhone")} />
+                    <input defaultValue={initialValues1.personalPhone} type={"text"}  placeholder="personalPhone" className={styles.baseInput}  {...register("personalPhone")} />
                 </Box>
                 <Box style={{display: "flex", margin: "20px 0"}}>
                     <img src={require("../../../assets/images/MobileSms.svg")} alt="" style={{marginRight :"20px"}}/>
-                    <input defaultValue={initialValues1.email} placeholder="email" type={errors.email && "search"} className={errors.email ? styles.baseInputError : styles.baseInput}  {...register("email", {
+                    <input defaultValue={initialValues1.email} placeholder="Email" type="email" className={errors.email ? styles.baseInputError : styles.baseInput}  {...register("email", {
                         required: true,
                         pattern: {
                             value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -247,23 +249,28 @@ export const ContactsInfo: FC = () => {
                 </Box>
                 <Box style={{display: "flex", margin: "20px 0"}}>
                     <img src={require("../../../assets/images/MobileWebsite.svg")} alt="" style={{marginRight :"20px"}}/>
-                    <input defaultValue={initialValues1.workWebsite} placeholder="workWebsite" className={styles.baseInput}  {...register("workWebsite")} />
+                    <input defaultValue={initialValues1.workWebsite}  type={"text"} placeholder="Website" className={styles.baseInput}  {...register("workWebsite")} />
                 </Box>
-                <Box className={styles.wrapper}>
-                    {Object.entries(profileActions).filter((el: any) => !!el[1].isOut).map((elem: any) => (
-                        <DarkButton style={{width: "100%"}} onClick={elem[1].handleOpenModal}
-                                    key={elem[0]}>{elem[1].title}</DarkButton>
-                    ))}
+                <Box style={{display: "flex", margin: "20px 0"}}>
+                    <img src={require("../../../assets/images/MobileKey.svg")} alt="" style={{marginRight :"20px"}}/>
+                    <DarkButton style={{borderRadius: "5px"}} onClick={PASSWORD.handleOpenModal}>Edit password</DarkButton>
                 </Box>
+
+                {/*<Box className={styles.wrapper}>*/}
+                {/*    {Object.entries(profileActions).filter((el: any) => !!el[1].isOut).map((elem: any) => (*/}
+                {/*        <DarkButton style={{width: "100%"}} onClick={elem[1].handleOpenModal}*/}
+                {/*                    key={elem[0]}>{elem[1].title}</DarkButton>*/}
+                {/*    ))}*/}
+                {/*</Box>*/}
 
                 {/* include validation with required or other standard HTML validation rules */}
                 {/*<input {...register("exampleRequired", { required: true })} />*/}
                 <Box style={{textAlign: "center"}}>
-                    <BaseButton classes={styles.button1} type="submit">Save</BaseButton>
+                    <BaseButton classes={styles.button1} type="submit">SAVE</BaseButton>
                 </Box>
                 <Box style={{textAlign: "center"}}>
                     {exit && <BaseButton classes={styles.button1}
-                                         onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>Exit</BaseButton>}
+                                         onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>EXIT</BaseButton>}
                 </Box>
                 <Box style={{textAlign: "center"}}>
                         <Typography fontSize={media(14, 16)} fontWeight="500" color="secondary">
@@ -577,7 +584,7 @@ const [loadingCard, setLoadingCrad] = useState(false)
                             </FormControl>
                         </Box>
                         <BaseInput style={{fontFamily: fonts[formik.values.fontFamily]?.fontFamily, textAlign: 'center'}}
-                                   placeholder="Welcome" name="welcome" id="welcome" type="text"/>
+                                   placeholder="Add front page text" name="welcome" id="welcome" type="text"/>
                         <BaseInput style={{fontFamily: fonts[formik.values.fontFamily]?.fontFamily, textAlign: 'center'}}
                                    placeholder="Company" name="title" id="title" type="text"/>
                         <BaseInput style={{textAlign: 'center'}} placeholder="Subtitle" name="subtitle" id="subtitle"
@@ -587,7 +594,7 @@ const [loadingCard, setLoadingCrad] = useState(false)
                             rows={8}
                             name="description"
                             id="description"
-                            placeholder="Description"
+                            placeholder="About"
                             value={formik.values.description}
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
@@ -595,8 +602,8 @@ const [loadingCard, setLoadingCrad] = useState(false)
 
                         <BaseInput style={{textAlign: 'center'}} placeholder="Address" name="address" id="address"
                                    type="text"/>
-                        <BaseButton classes={styles.button} type="submit">Save</BaseButton>
-                        {exit && <BaseButton classes={styles.button} onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>exit</BaseButton>}
+                        <BaseButton classes={styles.button} type="submit">SAVE</BaseButton>
+                        {exit && <BaseButton classes={styles.button} onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>EXIT</BaseButton>}
                         {!!formik.status && (
                             <Typography fontSize={media(14, 16)} fontWeight="500" color="secondary">
                                 {formik.status}
@@ -793,10 +800,10 @@ export const Socials: FC = () => {
                     )}
 
                     <Box style={{textAlign: 'center'}}>
-                        <BaseButton style={{width: "20%"}} type="submit">Save</BaseButton>
+                        <BaseButton style={{width: "20%"}} type="submit">SAVE</BaseButton>
                     </Box>
                     <Box style={{textAlign: 'center'}}>
-                        {exit && <BaseButton style={{width: "20%"}} onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>Exit</BaseButton>}
+                        {exit && <BaseButton style={{width: "20%"}} onClick={() => router.push(`/user/${authState.profile.uniqueId}`)}>EXIT</BaseButton>}
                     </Box>
                     {!!formik.status && (
                         <Typography textAlign="center" fontSize={media(16, 18)} fontWeight="500" color="secondary">
